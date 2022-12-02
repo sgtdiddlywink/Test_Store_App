@@ -1,0 +1,33 @@
+{% include "header.html" %}
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        {% for product in all_products %}
+        <div class="post-preview">
+          <img class="img-thumbnail" src="{{product.img_url}}" alt="">
+          <a href="{{ url_for('show_product', product_number=product.id) }}">
+            <h2 class="post-title">
+              {{product.product_name}}
+            </h2>
+            <h3 class="post-subtitle">
+              ${{product.product_price}}
+            </h3>
+          </a>
+          <p class="post-meta">
+            {% if current_user.id == 1: %}
+            <a href="{{url_for('delete_product', product_number=product.id) }}">DELETE PRODUCT</a>
+            {% endif %}
+          </p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+{% include "footer.html" %}
+{% endblock %}

@@ -1,0 +1,25 @@
+{% include "header.html" %}
+
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+          <div class="">
+            <img class="img-thumbnail" src="{{product.img_url}}" alt="">
+          </div>
+          <h1>{{ product.product_name }}</h1>
+          <h2 class="subheading">${{product.product_price}}</h2>
+          <h3 class="subheading">{{product.description}}</h3>
+          <a class="btn btn-primary float-right" href="{{url_for('create_checkout_session', product_number=product.id)}}">Checkout</a>
+          {% if current_user.id == 1 %}
+          <div class="clearfix">
+            <a class="btn btn-primary float-right" href="{{url_for('edit_stock', product_number=product.id)}}">Edit Product</a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% include "footer.html" %}
